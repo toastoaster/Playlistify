@@ -2,16 +2,18 @@
 # with exif
 # with eyeD3
 
+# entfernen: lyrics, official video, nicht-alphabet zeichen, hq
+
 import creds
 import requests
 import random
 from urllib.parse import urlencode
 import os
+import re
 
 FILE_TYPES = ["m4a", "M4A", "mp3", "MP3", "wav", "WAV"]
 playlist_id = ""
 songnames = []
-
 
 def create_playlist():
   playlist_name = "CGEN#" + \
@@ -42,10 +44,10 @@ def create_playlist():
 def add_songs():
   songids = []
   for song_name in songnames:
+    print(re.sub('lyrics|official video|hq', '', song_name, flags=re.IGNORECASE))
     query = {
-        "q": song_name,
+        "q": re.sub('lyrics|official video|hq', '', song_name, flags=re.IGNORECASE),
         "type": "track",
-        "market": "DE",
         "limit": 1,
         "offset": 0
     }
@@ -105,7 +107,7 @@ def get_songnames():
 if __name__ == "__main__":
   if playlist_id == "":
     create_playlist()
-  get_songnames()
-  add_songs()
-  print("Finish!")
-  input()
+  if playlist_id != "":
+    get_songnames()
+    add_songs()
+    print("Finish!")
