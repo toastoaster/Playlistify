@@ -1,8 +1,5 @@
-# access metadata mp3
-# with exif
-# with eyeD3
-
-# entfernen: lyrics, official video, nicht-alphabet zeichen, hq
+# Further ideas:
+# Collecting mp3-Metadata with exif, eyeD3
 
 import creds
 import requests
@@ -44,9 +41,8 @@ def create_playlist():
 def add_songs():
   songids = []
   for song_name in songnames:
-    print(re.sub('lyrics|official video|hq', '', song_name, flags=re.IGNORECASE))
     query = {
-        "q": re.sub('lyrics|official video|hq', '', song_name, flags=re.IGNORECASE),
+        "q": re.sub('lyrics|official video|hq|hd', '', song_name, flags=re.IGNORECASE), # remove pointless information
         "type": "track",
         "limit": 1,
         "offset": 0
