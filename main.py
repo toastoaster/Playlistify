@@ -9,6 +9,7 @@ import os
 import re
 
 FILE_TYPES = ["m4a", "M4A", "mp3", "MP3", "wav", "WAV"]
+FILTER = "lyrics|lyric video|official video|( |_)hq|( |_)hd|[hd]|[hq]|mva|official music video"
 playlist_id = ""
 songnames = []
 
@@ -42,7 +43,7 @@ def add_songs():
   songids = []
   for song_name in songnames:
     query = {
-        "q": re.sub('lyrics|official video|hq|hd', '', song_name, flags=re.IGNORECASE), # remove pointless information
+        "q": re.sub(FILTER, '', song_name, flags=re.IGNORECASE), # remove pointless information
         "type": "track",
         "limit": 1,
         "offset": 0
@@ -101,9 +102,9 @@ def get_songnames():
 
 
 if __name__ == "__main__":
-  if playlist_id == "":
-    create_playlist()
-  if playlist_id != "":
+  #if playlist_id == "":
+  #  create_playlist()
+  #if playlist_id != "":
     get_songnames()
     add_songs()
     print("Finish!")
