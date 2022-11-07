@@ -9,7 +9,7 @@ import os
 import re
 
 FILE_TYPES = ["m4a", "M4A", "mp3", "MP3", "wav", "WAV"]
-FILTER = "lyrics|lyric video|official video|( |_)hq|( |_)hd|[hd]|[hq]|mva|official music video"
+FILTER = "lyrics|lyric video|official video|full hd|( |_)hq|( |_)hd|[hd]|[hq]|mva|official music video"
 playlist_id = ""
 songnames = []
 
@@ -102,9 +102,9 @@ def get_songnames():
 
 
 if __name__ == "__main__":
-  #if playlist_id == "":
-  #  create_playlist()
-  #if playlist_id != "":
+  if playlist_id == "":
+    create_playlist()
+  if playlist_id != "":
     get_songnames()
     add_songs()
     print("Finish!")
